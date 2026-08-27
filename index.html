@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SD Window & Gutter Cleaning — Audit</title><style>
+:root{--bg:#0d1117;--panel:#161b22;--ink:#e6edf3;--mut:#9aa7b4;--line:#2a3340;--accent:#2f81f7;
+  --good:#3fb950;--bad:#f85149;--gradF:#f85149;--gradD:#e8702a;--gradC:#d29922;--gradB:#3fb950;--gradA:#2ea043;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--mut);font-weight:600}
+header{padding:46px 0 28px;border-bottom:1px solid var(--line);background:radial-gradient(1200px 400px at 70% -10%,rgba(47,129,247,.18),transparent)}
+h1{font-size:30px;font-weight:800;margin:10px 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mut);font-size:15px}
+.hero{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:center;margin:34px 0 8px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.gradecard{border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center;position:relative;overflow:hidden}
+.gc-F{background:linear-gradient(160deg,#2a1410,#1c2330)}.gc-D{background:linear-gradient(160deg,#2a1c10,#1c2330)}
+.gc-C{background:linear-gradient(160deg,#2a2410,#1c2330)}.gc-B{background:linear-gradient(160deg,#102a1a,#1c2330)}
+.bigletter{font-size:96px;font-weight:900;line-height:1;position:relative}
+.bl-F{color:var(--gradF);text-shadow:0 0 40px rgba(248,81,73,.45)}
+.bl-D{color:var(--gradD);text-shadow:0 0 40px rgba(232,112,42,.45)}
+.bl-C{color:var(--gradC);text-shadow:0 0 40px rgba(210,153,34,.45)}
+.score100{font-size:18px;color:var(--mut);margin-top:6px;position:relative}
+.heroread h2{font-size:21px;font-weight:800;margin-bottom:10px}
+.heroread p{color:var(--mut);font-size:15.5px}
+.heroread .tag{display:inline-block;margin-top:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink);background:var(--panel)}
+section{padding:34px 0;border-bottom:1px solid var(--line)}
+.h{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.rname{font-weight:600;font-size:15px}
+.bar{height:7px;background:#0b0f15;border-radius:99px;margin-top:9px;overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.badge{font-weight:800;font-size:15px;min-width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0d1117}
+.gF{background:var(--gradF)}.gD{background:var(--gradD)}.gC{background:var(--gradC)}.gB{background:var(--gradB);color:#06210f}.gA{background:var(--gradA);color:#06210f}
+.sc{font-size:12px;color:var(--mut);margin-top:3px}
+.flag{background:linear-gradient(160deg,#2a1410,#161b22);border:1px solid #6f2a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.flag .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--bad);font-weight:700;margin-bottom:8px}
+.win{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.win .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--good);font-weight:700;margin-bottom:8px}
+.warn{background:linear-gradient(160deg,#2a2410,#161b22);border:1px solid #6f5a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.warn .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--gradC);font-weight:700;margin-bottom:8px}
+.flag p,.win p,.warn p{color:var(--mut);font-size:14.5px;margin-bottom:9px}
+.flag p:last-child,.win p:last-child,.warn p:last-child{margin-bottom:0}
+.flag b,.win b,.warn b{color:var(--ink)}
+.flag ul,.win ul,.warn ul{margin:0 0 9px 20px;color:var(--mut);font-size:14.5px}
+.flag li,.win li,.warn li{margin-bottom:6px}
+.code{background:#0b0f15;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;line-height:1.85;color:var(--mut);overflow-x:auto}
+.code .ph{color:#ff9d94;font-weight:700}.code .ok{color:#84e0a8;font-weight:700}.code .c{color:#5b6672}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cmp th{text-align:left;padding:11px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line);font-weight:700}
+.cmp td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--mut);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}.cmp td b{color:var(--ink)}.cmp tr.you td{background:#241a12}
+.cmp .yes{color:var(--good);font-weight:700}.cmp .no{color:var(--bad);font-weight:700}
+.opp{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.opp{grid-template-columns:1fr}}
+.ocard{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px;text-align:center}
+.ocard .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+.ocard .big{font-size:30px;font-weight:900;color:var(--good);margin:8px 0 2px}
+.ocard .small{font-size:13px;color:var(--mut)}
+.oppnote{color:var(--mut);font-size:14px;margin-top:14px}.oppnote b{color:var(--ink)}
+.arrow{display:flex;align-items:center;justify-content:center;gap:18px;margin:6px 0 2px;flex-wrap:wrap}
+.pill{font-size:60px;font-weight:900;line-height:1}
+.pill.from-F{color:var(--gradF)}.pill.from-D{color:var(--gradD)}.pill.from-C{color:var(--gradC)}
+.pill.to{color:var(--gradA)}
+.pilllab{font-size:12px;color:var(--mut);text-align:center;text-transform:uppercase;letter-spacing:.1em}
+.ar{font-size:34px;color:var(--mut)}
+ul.road{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){ul.road{grid-template-columns:1fr}}
+ul.road li{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:11px 14px;font-size:14.5px}
+.road2 li{border-left-color:var(--good)}
+.cta{text-align:center;padding:40px 0 56px}
+.cta h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.cta p{color:var(--mut);font-size:15px}
+footer{color:var(--mut);font-size:12.5px;text-align:center;padding:22px 0 40px;line-height:1.7}
+</style></head><body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Website &amp; Advertising Audit</div>
+    <h1>SD Window &amp; Gutter Cleaning</h1>
+    <div class="sub">Prepared for Stan &middot; 27 August 2026 &middot; AG1 Consulting</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="gradecard gc-D">
+      <div class="bigletter bl-D">D</div>
+      <div class="score100">37 / 100</div>
+    </div>
+    <div class="heroread">
+      <h2>You sell commercial contracts through a website with no enquiry form on it.</h2>
+      <p>You told our team you run <b>8&ndash;10 commercial jobs a week</b>, could take
+      <b>2&ndash;3 more</b>, and want to hire <b>1&ndash;2 more people</b>. We read your site for
+      exactly that. <b>There is no form on any page.</b> A facilities manager who wants to put you on
+      a tender list has one route: ring a mobile in working hours, and hope you can talk.</p>
+      <span class="tag">Commercial focus &middot; team of three &middot; hiring</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="h">Finding 1 &mdash; Commercial Buyers Do Not Ring Mobiles</div>
+    <div class="flag">
+      <div class="lab">This is the gap between the work you have and the work you want</div>
+      <div class="code">Forms anywhere on the site   <span class="ph">0</span>
+Form input fields            <span class="ph">0</span>
+Email address published      <span class="ph">none found</span>
+Tap-to-call number           <span class="ok">07847 296805 — works</span></div>
+      <p>Your phone link is right, and for a domestic customer that is enough. <b>Commercial is a
+      different buyer entirely.</b> A facilities manager, a managing agent or a site manager needs to
+      send you something in writing &mdash; a site list, a spec, a request for a quote &mdash; usually
+      because he has to show his own boss he got three prices.</p>
+      <p><b>He cannot do that from your website.</b> No form, no email address. So either he rings a
+      mobile and hopes you are not up a ladder, or he goes to a firm whose site lets him send the job
+      over at four in the afternoon and get on with his day.</p>
+      <p>The two to three extra jobs a week you said you could take are most likely sitting in exactly
+      that gap.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h">Finding 2 &mdash; Nothing Is Measured</div>
+    <div class="warn">
+      <div class="lab">Read from your served page source</div>
+      <div class="code">Google Analytics (GA4)     <span class="ph">✗ not present</span>
+Google Tag Manager         <span class="ph">✗ not present</span>
+Ads conversion tracking    <span class="ph">✗ not present</span>
+Meta pixel                 <span class="ph">✗ not present</span></div>
+      <p>No visit, call or enquiry is counted anywhere. Which means nobody can tell you which of your
+      commercial work came from the website, from word of mouth, or from a van seen on a job.</p>
+      <p><b>This is the first thing we would fix and the cheapest.</b> It has to exist before any
+      advertising is worth running, because Google's bidding optimises against conversion data and with
+      none it optimises for clicks &mdash; and clicks are not contracts.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h">Finding 3 &mdash; You Are Hiring, And Your Site Does Not Say So</div>
+    <div class="warn">
+      <div class="lab">You told our team you want to bring on one to two more people</div>
+      <p>There is <b>no careers page, no vacancy and no way to apply</b> anywhere on the site. In
+      window and gutter cleaning the person you want is usually already working for a competitor, and
+      the moment he looks you up is the moment you either capture him or do not.</p>
+      <p>Adding a short &ldquo;join the team&rdquo; page with the pay, the hours and a two-minute form
+      costs nothing and works while you are on a job. <b>It is the same fix as the commercial form,
+      pointed at a different person.</b></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h">What Is Genuinely Good</div>
+    <div class="win">
+      <div class="lab">You are ahead of most of the trade on these</div>
+      <ul>
+        <li><b>Your title tag is properly written.</b> &ldquo;SD Window &amp; Gutter Cleaning | Trusted Local Team | Book Today&rdquo; &mdash; service, positioning and a call to action. Most sites we audit have nothing like this.</li>
+        <li><b>Tap-to-call works</b> on mobile, first tap.</li>
+        <li><b>A commercial book of 8&ndash;10 jobs a week</b> is the hard part, and you already have it. Commercial is repeat, contracted and far more valuable than domestic.</li>
+        <li><b>A team of three</b> — you are past the point where the business depends entirely on one pair of hands.</li>
+      </ul>
+      <p><b>This is not a broken business with a website problem.</b> It is a working commercial
+      operation whose website cannot take an enquiry or an application.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h">The Scorecard</div>
+    <div class="grid">
+      <div class="row"><div><div class="rname">Homepage title tag</div><div class="sc">Service, positioning and CTA all present. Genuinely well written.</div></div><div class="badge gA">A&minus;</div></div>
+      <div class="row"><div><div class="rname">Tap-to-call number</div><div class="sc">07847 296805 as a working tel: link.</div></div><div class="badge gB">B+</div></div>
+      <div class="row"><div><div class="rname">Meta description</div><div class="sc">Present and readable.</div></div><div class="badge gB">B</div></div>
+      <div class="row"><div><div class="rname">Enquiry form</div><div class="sc">No form on any page. Zero form fields across the site.</div></div><div class="badge gF">F</div></div>
+      <div class="row"><div><div class="rname">Email address published</div><div class="sc">None found — a commercial buyer cannot send you a spec.</div></div><div class="badge gF">F</div></div>
+      <div class="row"><div><div class="rname">Analytics</div><div class="sc">No GA4, no tag manager, nothing counting anything.</div></div><div class="badge gF">F</div></div>
+      <div class="row"><div><div class="rname">Conversion tracking</div><div class="sc">None. Advertising cannot be measured against jobs won.</div></div><div class="badge gF">F</div></div>
+      <div class="row"><div><div class="rname">Commercial page</div><div class="sc">No separate route for commercial buyers, who want different answers.</div></div><div class="badge gD">D</div></div>
+      <div class="row"><div><div class="rname">Careers page</div><div class="sc">None, despite actively hiring.</div></div><div class="badge gF">F</div></div>
+      <div class="row"><div><div class="rname">Insurance and method statements</div><div class="sc">Not published. Commercial clients ask before anything else.</div></div><div class="badge gD">D&minus;</div></div>
+      <div class="row"><div><div class="rname">Reviews as a rating and count</div><div class="sc">No visible star rating or review count on the site.</div></div><div class="badge gD">D</div></div>
+      <div class="row"><div><div class="rname">Town pages</div><div class="sc">None found — one site covering the whole patch.</div></div><div class="badge gD">D</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h">The Opportunity, On Your Own Figures</div>
+    <div class="opp">
+      <div class="ocard"><div class="lab">You now</div><div class="big">8&ndash;10</div><div class="small">commercial jobs a week</div></div>
+      <div class="ocard"><div class="lab">Spare capacity</div><div class="big">2&ndash;3</div><div class="small">more a week, as you told us</div></div>
+      <div class="ocard"><div class="lab">Ways to enquire online</div><div class="big">0</div><div class="small">forms or email addresses</div></div>
+    </div>
+    <p class="oppnote"><b>We have deliberately not put a revenue figure on this.</b> You have not told us
+    your average commercial job value and we are not going to invent one to make a document look
+    impressive. Bring it to the call and the arithmetic takes a minute. The point of the third card is
+    that <b>the capacity you want to fill has no route to reach you in writing.</b></p>
+  </section>
+
+  <section>
+    <div class="h">Projected Grade After Build</div>
+    <div class="arrow">
+      <div class="gradecard gc-D" style="flex:1"><div class="bigletter bl-D">D</div><div class="score100">37 / 100 today</div></div>
+      <div class="ar">&rarr;</div>
+      <div class="gradecard gc-B" style="flex:1"><div class="bigletter" style="color:#3fb950;text-shadow:0 0 40px rgba(63,185,80,.45)">A&minus;</div><div class="score100">88 / 100 projected</div></div>
+    </div>
+    <p class="oppnote">Projected, not promised. It reflects the twelve rows above being fixed.
+    <b>It is not a projection of leads, contracts or revenue.</b></p>
+  </section>
+
+  <section>
+    <div class="h">Fix First &mdash; This Week, No Spend</div>
+    <ul class="road">
+      <li><b>Add an enquiry form and publish an email address.</b> Commercial buyers need to send you something in writing</li>
+      <li><b>Install GA4 and conversion tracking</b> — nothing can be measured or improved until it exists</li>
+      <li><b>Publish your insurance</b> — the first question every commercial client asks</li>
+      <li><b>Ask recent customers for a Google review</b> so the proof becomes a visible number</li>
+    </ul>
+    <div class="h" style="margin-top:24px">Build Next</div>
+    <ul class="road road2">
+      <li><b>A commercial page</b> with site numbers, frequency and access — written for a facilities manager, not a homeowner</li>
+      <li><b>A &ldquo;join the team&rdquo; page</b> with pay, hours and a two-minute form, since you are hiring</li>
+      <li><b>Town pages</b> across your patch</li>
+      <li><b>Then advertise</b>, into a site that can finally take an enquiry and count it</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <h2>Ten commercial jobs a week, room for three more, and no way to enquire in writing.</h2>
+    <p>The hard part &mdash; winning commercial work and keeping it &mdash; is already done. The gap is
+    the front door.</p>
+  </div>
+</div>
+
+<footer>
+  Prepared by Andrei Givero &middot; AG1 Consulting &middot; 27 August 2026<br>
+  For Stan of SD Window &amp; Gutter Cleaning. All findings were read from sdwindowguttercleaning.co.uk
+  and its served page source on 27 August 2026 and reflect that page on that date only. Form, tel: link
+  and tag counts are literal counts taken from that source. <b>Absence of a form, email address,
+  accreditation or review count means it was not present in the served page &mdash; not that you do not
+  hold or use it</b>; anything held but unpublished would not appear in this check. Some page builders
+  render forms after page load, so if an enquiry form exists that we could not see, tell us and we will
+  re-check it with you. Job volume, spare capacity, team size and your intention to hire are <b>as you
+  stated them to our team</b> and have not been independently verified. Grades are our own assessment
+  against a consistent framework and are not an industry-standard measure. No number of leads, jobs or
+  revenue is promised or forecast anywhere in this document.
+</footer>
+</body></html>
